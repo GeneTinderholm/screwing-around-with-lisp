@@ -1,0 +1,36 @@
+(defun it-member (el lst)
+  (dolist (x lst nil)
+    (when (equal el x)
+      (return t))))
+
+(defun it-assoc (key assoc-list)
+  (dolist (lst assoc-list nil)
+    (when (equal (car lst) key)
+      (return lst))))
+
+(defun check-all-odd (lst)
+  (cond ((null lst) t)
+        ((evenp (car lst))
+         (format t "~&Checking ~S" (car lst))
+         nil)
+        (t
+         (format t "~&Checking ~S" (car lst))
+         (check-all-odd (cdr lst)))))
+
+(defun fact (n)
+  (do ((i n (- i 1))
+       (result 1 (* result i)))
+      ((zerop i) result)))
+
+(defun ffo-with-do (list-of-numbers)
+  (do* ((x list-of-numbers (rest x))
+        (e (first x) (first x)))
+       ((null x) nil)
+    (if (oddp e)
+        (return e))))
+
+(defun fib (n)
+  (do ((a 0 b)
+       (b 1 (+ a b))
+       (count 1 (1+ count)))
+      ((= n count) b)))
